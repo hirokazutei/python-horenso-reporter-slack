@@ -1,5 +1,6 @@
 # python-horenso-reporter-slack
 A simple reporter for horenso with Python
+![Demo Image](https://github.com/hirokazutei/python-horenso-reporter-slack/blob/master/demoimg.png)
 
 # Usage
 ### Download horenso
@@ -23,48 +24,29 @@ $ export SLACK_NOTIFICATION_MUTE_LEVEL="<0 ~ 2>"
 ~~~
 
 #### SLACK TOKEN
-
-
-Required, can be found on the Slack API page.
+* Required, can be found on the Slack API page.
 
 #### SLACK CHANNEL
-
-
-The name of the channel you would like to send the message to.
-
-Default is #general
+* The name of the channel you would like to send the message to.
+* Default is #general
 
 #### SLACK SUCCESS EMOJI
-
-
-The icon used when the command runs without any errors.
-
-Default is :white_check_mark:
+* The icon used when the command runs without any errors.
+* Default is :white_check_mark:
 
 #### SLACK ERROR EMOJI
-
-
-The icon used when the command encounters an exit code of 1.
-
-Default is :warning:
+* The icon used when the command encounters an exit code of 1.
+* Default is :warning:
 
 #### SLACK MAJOR ERROR EMOJI
-
-
-The icon used when the command encounters an exit code of 2 or others.
-
-Default is :no_entry:
+* The icon used when the command encounters an exit code of 2 or others.
+* Default is :no_entry:
 
 #### SLACK NOTIFICATION MUTE LEVEL
-
-
-A value between 0 and 2 inclusive.
-
-0 displays all messages.
-
-1 ignores commands successfully ran.
-
-2 ignores commands successfully ran and regular errors.
+* A value between 0 and 2 inclusive.
+* 0 displays all messages.
+* 1 ignores commands successfully ran.
+* 2 ignores commands successfully ran and regular errors.
 
 ### Run horenso to get report on Slack
 ~~~
