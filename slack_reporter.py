@@ -64,7 +64,7 @@ elif exitCode >= 2 and SLACK_NOTIFICATION_MUTE_LEVEL <= 2:
 
 payload = json.dumps([
     {
-        "text": str(SLACK_NOTIFICATION_MUTE_LEVEL),
+        "text": message,
         "title": title,
         "fallback": "Message Error",
         "color": color,
