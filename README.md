@@ -3,7 +3,7 @@ A simple reporter for horenso with Python
 ![Demo Image](https://github.com/hirokazutei/python-horenso-reporter-slack/blob/master/demoimg.png)
 
 # Usage
-### Download horenso
+### Download horenso by Songmu [[GitHub](https://github.com/Songmu/horenso "GitHub page of Horenso")]
 ~~~
 $ go get github.com/Songmu/horenso/cmd/horenso
 ~~~
@@ -69,3 +69,8 @@ $ horenso -r "python DIR/slackr_eporter.py" -- <COMMAND>
 ~~~
 
 *Note: If you are using python3, you will need install dateutil*
+
+
+### Future
+* Add Mentions
+* Check if it can return list objects properly
