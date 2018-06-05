@@ -21,6 +21,7 @@ $ export SLACK_SUCCESS_EMOJI="<SLACK EMOJI>"
 $ export SLACK_ERROR_EMOJI="<SLACK EMOJI>"
 $ export SLACK_MAJOR_ERROR_EMOJI="<SLACK EMOJI>"
 $ export SLACK_NOTIFICATION_MUTE_LEVEL="<0 ~ 2>"
+$ export SLACK_REPORT_ITEMS=['ITEMS','TO','REPORT']
 ~~~
 
 #### SLACK TOKEN
@@ -47,6 +48,20 @@ $ export SLACK_NOTIFICATION_MUTE_LEVEL="<0 ~ 2>"
 * 0 displays all messages.
 * 1 ignores commands successfully ran.
 * 2 ignores commands successfully ran and regular errors.
+
+#### SLACK NOTIFICATION MUTE LEVEL
+* List of strings representing the items that one wishes to report
+* Default is: `['stdout', 'stderr', 'startAt', 'endAt']`
+* `exitCode` and `command` are reported as default. Change that in the code if you wish
+  * Other Items:
+    * `'systemTime'`
+    * `'commandArgs'`
+    * `'userTime'`
+    * `'hostname'`
+    * `'pid'`
+    * `'signaled'`
+    * `'result'`
+    * `'output'
 
 ### Run horenso to get report on Slack
 ~~~
