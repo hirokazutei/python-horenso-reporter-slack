@@ -61,11 +61,11 @@ $ export SLACK_REPORT_ITEMS=['ITEMS','TO','REPORT']
     * `'pid'`
     * `'signaled'`
     * `'result'`
-    * `'output'
+    * `'output'`
 
 ### Run horenso to get report on Slack
 ~~~
-$ horenso -r "python DIR/slackr_eporter.py" -- <COMMAND>
+$ horenso -r "python DIR/slack_reporter.py" -- <COMMAND>
 ~~~
 
 *Note: If you are using python3, you will need install dateutil*
