@@ -42,100 +42,126 @@ except Exception:
 data = json.load(sys.stdin)
 
 carrier = []
+errors = []
 if 'stdout' in SLACK_REPORT_ITEMS:
-    stdout = data['stdout']
+    try:
+        jsondata = json.loads(data['tdout'])
+        stdout = json.dumps(jsondata, indent=8)
+    except Exception:
+        stdout = data['stdout']
     load = {
         "title": "StdOut",
-        "value": data['stdout'],
-        "short": False
+        "value": stdout
     }
     carrier.append(load)
 if 'stderr' in SLACK_REPORT_ITEMS:
-    stdout = data['stderr']
+    try:
+        jsondata = json.loads(data['stderr'])
+        stderr = json.dumps(jsondata, indent=8)
+    except Exception:
+        stderr = data['stderr']
     load = {
         "title": "StdErr",
-        "value": data['stderr'],
-        "short": False
+        "value": stderr
     }
     carrier.append(load)
 if 'result' in SLACK_REPORT_ITEMS:
-    stdout = data['result']
+    try:
+        jsondata = json.loads(data['result'])
+        result = json.dumps(jsondata, indent=8)
+    except Exception:
+        result = data['result']
     load = {
         "title": "Result",
-        "value": data['result'],
-        "short": False
+        "value": result
     }
     carrier.append(load)
 if 'output' in SLACK_REPORT_ITEMS:
-    stdout = data['output']
+    try:
+        jsondata = json.loads(data['output'])
+        output = json.dumps(jsondata, indent=8)
+    except Exception:
+        output = data['output']
     load = {
         "title": "Output",
-        "value": data['output'],
-        "short": False
+        "value": output
     }
     carrier.append(load)
 if 'hostname' in SLACK_REPORT_ITEMS:
-    stdout = data['hostname']
+    hostname = data['hostname']
     load = {
         "title": "Hostname",
-        "value": data['hostname'],
-        "short": False
+        "value": hostname,
+        "short": True
     }
     carrier.append(load)
 if 'signaled' in SLACK_REPORT_ITEMS:
-    stdout = data['signaled']
+    signaled = data['signaled']
     load = {
         "title": "Signaled",
-        "value": data['signaled'],
-        "short": False
+        "value": signaled
     }
     carrier.append(load)
 if 'commandArgs' in SLACK_REPORT_ITEMS:
-    stdout = data['commandArgs']
+    commandArgs = data['commandArgs']
     load = {
         "title": "Command Args",
-        "value": data['commandArgs'],
-        "short": False
+        "value": commandArgs
     }
     carrier.append(load)
 if 'pid' in SLACK_REPORT_ITEMS:
-    stdout = data['pid']
+    pid = data['pid']
     load = {
         "title": "PID",
-        "value": data['pid'],
-        "short": False
+        "value": pid,
+        "short": True
     }
     carrier.append(load)
 if 'userTime' in SLACK_REPORT_ITEMS:
-    stdout = data['userTime']
+    userTime = data['userTime']
     load = {
         "title": "userTime",
-        "value": data['userTime'],
+        "value": userTime,
         "short": True
     }
     carrier.append(load)
 if 'systemTime' in SLACK_REPORT_ITEMS:
-    stdout = data['systemTime']
+    systemTime = data['systemTime']
     load = {
         "title": "systemTime",
-        "value": data['systemTime'],
+        "value": systemTime,
         "short": True
     }
     carrier.append(load)
 if 'startAt' in SLACK_REPORT_ITEMS:
-    stdout = data['startAt']
+    try:
+        startAt = parser.parse(data['startAt']).strftime('%y/%m/%d/ %H:%M:%S')
+    except Exception as error:
+        errors.append(str(error))
+        startAt = data['startAt']
     load = {
         "title": "Start At:",
-        "value": parser.parse(data['startAt']).strftime('%y/%m/%d/ %H:%M:%S'),
+        "value": startAt,
         "short": True
     }
     carrier.append(load)
 if 'endAt' in SLACK_REPORT_ITEMS:
-    stdout = data['endAt']
+    try:
+        endAt = parser.parse(data['endAt']).strftime('%y/%m/%d/ %H:%M:%S')
+    except Exception as error:
+        errors.append(str(error))
+        endAt = data['endAt']
     load = {
         "title": "End At:",
-        "value": parser.parse(data['endAt']).strftime('%y/%m/%d/ %H:%M:%S'),
+        "value": endAt,
         "short": True
+    }
+    carrier.append(load)
+
+if errors:
+    load = {
+        "title": "Time Parse Error",
+        "value": str(errors)
     }
     carrier.append(load)
 
@@ -162,7 +188,7 @@ payload = json.dumps([
         "footer_icon": "https://cdn0.iconfinder.com/data/icons/veggie/64/spinach-256.png",
         "footer": "Horenso Report",
         "fields": carrier
-    }])
+    }], indent=4)
 
 response = sc.api_call(
     "chat.postMessage",
@@ -171,6 +197,7 @@ response = sc.api_call(
     text=text,
     attachments=payload
 )
+
 if not response['ok']:
     sc.api_call(
         "chat.postMessage",
