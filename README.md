@@ -72,5 +72,7 @@ $ horenso -r "python DIR/slackr_eporter.py" -- <COMMAND>
 
 
 ### Future
-* Add Mentions
-* Check if it can return list objects properly
+* Mentions
+* Proper bot support
+* Pastebin/Fluend support
+* Please suggest more
