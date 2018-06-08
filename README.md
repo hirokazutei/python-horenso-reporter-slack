@@ -22,6 +22,7 @@ $ export SLACK_ERROR_EMOJI="<SLACK EMOJI>"
 $ export SLACK_MAJOR_ERROR_EMOJI="<SLACK EMOJI>"
 $ export SLACK_NOTIFICATION_MUTE_LEVEL="<0 ~ 2>"
 $ export SLACK_REPORT_ITEMS=['ITEMS','TO','REPORT']
+$ export SLACK_FORMAT_ERROR=False
 ~~~
 
 #### SLACK TOKEN
@@ -62,6 +63,11 @@ $ export SLACK_REPORT_ITEMS=['ITEMS','TO','REPORT']
     * `'signaled'`
     * `'result'`
     * `'output'`
+
+#### SLACK FORMAT ERROR
+* This is just to show if there were any errors in fornatting the outputs or time.
+* Everything should still work even if errors occur during formatting.
+* Default is set to `False`.
 
 ### Run horenso to get report on Slack
 ~~~
